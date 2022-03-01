@@ -1,0 +1,38 @@
+<reservation planning="Padel">
+<creneau ordre="2">
+   <court>A</court>
+   <horaire>9</horaire>
+   <user>stfbestone@gmail.com</user>
+   <mdp>newsc@fÃ©</mdp>
+</creneau>
+<creneau ordre="1">
+   <court>A</court>
+   <horaire>10</horaire>
+   <user>sduroi@laposte.net</user>
+   <mdp>newsc@fÃ©</mdp>
+</creneau>
+<creneau ordre="3">
+   <court>A</court>
+   <horaire>11</horaire>
+   <user>padeltremblay@gmail.com</user>
+   <mdp>newsc@fÃ©</mdp>
+</creneau>
+<creneau ordre="4">
+   <court>C</court>
+   <horaire>9</horaire>
+   <user>julien1padel@gmail.com</user>
+   <mdp>newsc@fÃ©</mdp>
+</creneau>
+<creneau ordre="5">
+   <court>C</court>
+   <horaire>10</horaire>
+   <user>julien2padel@gmail.com</user>
+   <mdp>newsc@fÃ©</mdp>
+</creneau>
+<creneau ordre="6">
+   <court>C</court>
+   <horaire>11</horaire>
+   <user>julien3padel@gmail.com</user>
+   <mdp>newsc@fÃ©</mdp>
+</creneau>
+</reservation>
