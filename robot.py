@@ -84,7 +84,7 @@ class tache (Thread):
                 while (self.actif and self.execute and i<self.iteration):
                     i = i + 1
 #                    with verrou:               
-                    self.fichier.info (str(datetime.today())+": réservation "+self.mail+" court "+self.court+" horaire "+self.heure+"\n")
+                    self.fichier.info (str(datetime.today())+": réservation "+self.mail+" court "+self.court+" horaire "+self.heure)
                     self.fct (self.fichier, self.driver, self.court, self.dateRes, self.heure, self.mail, self.mdp)
                 self.termine = True
 
@@ -127,11 +127,11 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
     driver.find_element(By.ID, "d").clear()
     driver.find_element(By.ID, "d").send_keys(dateRes)
 #    driver.find_element(By.ID, "d").send_keys("17/02/2022")
-    fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1\n")
+    fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1")
     driver.save_screenshot("capture"+court+heure+"v1.png")
     driver.find_element(By.CSS_SELECTOR, ".btn").click()
     elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
-    fichier.info (str(elements)+" verif 1.1\n")
+    fichier.info (str(elements)+" verif 1.1")
     
     dtd = datetime.today()
     while len(elements)==0 and (datetime.today()-dtd).seconds < 3:
@@ -141,27 +141,27 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
         driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
 #        driver.find_element(By.ID, "d").clear()
 #        driver.find_element(By.ID, "d").send_keys(dateRes)
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2\n")
+        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
 #        driver.find_element(By.CSS_SELECTOR, ".btn").click()
         elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
     driver.save_screenshot("capture"+court+heure+"v2.png")
 
     try:
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A\n")
+        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
         driver.save_screenshot("capture"+court+heure+"a.png")
         driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B\n")
+        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
         driver.save_screenshot("capture"+court+heure+"b.png")
         driver.find_element(By.NAME, "btnresa").click()
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C\n")
+        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
         driver.save_screenshot("capture"+court+heure+"c.png")
     except Exception:
-        fichier.info (str(datetime.today())+": erreur réservation date "+ dateRes+ " court "+ court + " heure " + heure+"\n")
+        fichier.info (str(datetime.today())+": erreur réservation date "+ dateRes+ " court "+ court + " heure " + heure)
         pass
     try:
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" D\n")
+        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" D")
         driver.find_element(By.XPATH, ".//tagName[@attribute=’OK’]");
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" E\n")
+        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" E")
     except Exception:
         pass
 #    driver.find_element(By.NAME, "btnlogout").click()
@@ -180,8 +180,8 @@ dictCourt = {"A":"22" , "B":"23" , "C":"24" , "D":"25" }
 
 #fichier = open('TraceRobot.log', 'a')
 
-root = logging.getLogger(__name__)
-root.setLevel(logging.DEBUG)
+fichier = logging.getLogger(__name__)
+fichier.setLevel(logging.DEBUG)
 
 handler = logging.StreamHandler(sys.stderr)
 handler.setLevel(logging.DEBUG)
@@ -192,7 +192,7 @@ handler.setFormatter(formatter)
 
 
 print ("Lancement Robot réservation Padel")
-fichier.info (str(datetime.today())+": Lancement Robot réservation Padel"+"\n")
+fichier.info (str(datetime.today())+": Lancement Robot réservation Padel")
 print ("")
 
 try:
@@ -237,7 +237,7 @@ if attente:
 else:
     print ("lancement immédiat du Robot")
 
-fichier.info (str(datetime.today())+": Date "+dateRes +" attente "+str(attente)+"\n")
+fichier.info (str(datetime.today())+": Date "+dateRes +" attente "+str(attente))
  
 
 # Get all créneaux
