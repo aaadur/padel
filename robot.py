@@ -204,8 +204,12 @@ except :
     syntaxeParametre()
     exit()
 
-dateRes = (date.today() + timedelta(days=7)).isoformat()
-hAttente = "00:00:00"
+# Time en local
+#dateRes = (date.today() + timedelta(days=7)).isoformat()
+#hAttente = "00:00:00"
+# Time de de la région west europe
+dateRes = date.today()
+hAttente = "23:00:00"
 attente = True
 
 nbarg =0
