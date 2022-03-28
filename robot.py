@@ -50,8 +50,9 @@ class tache (Thread):
         self.dateRes = dateRes[8:10]+"/"+dateRes[5:7]+"/"+dateRes[0:4]
 
         self.attente = True
-#        self.datetime = ((date.today() + timedelta(days=1)).isoformat())+" "+hAttente
-        self.datetime = (date.today().isoformat())+" "+hAttente
+        self.datetime = ((date.today() + timedelta(days=1)).isoformat())+" "+hAttente
+
+#        self.datetime = (date.today().isoformat())+" "+hAttente
         self.iteration = 1
         self.termine = False
         cdtTremblayLog (self.fichier, self.driver, self.court, self.dateRes, self.heure, self.mail, self.mdp)
@@ -208,9 +209,9 @@ except :
 dateRes = (date.today() + timedelta(days=7)).isoformat()
 
 # Time en local
-#hAttente = "00:00:00"
+hAttente = "00:00:00"
 # Time de de la région west europe
-hAttente = "23:00:00"
+#hAttente = "23:00:00"
 
 attente = True
 
