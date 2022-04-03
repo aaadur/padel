@@ -50,13 +50,15 @@ class tache (Thread):
         self.dateRes = dateRes[8:10]+"/"+dateRes[5:7]+"/"+dateRes[0:4]
 
         self.attente = True
-        self.datetime = ((date.today() + timedelta(days=1)).isoformat())+" "+hAttente
 
-#        self.datetime = (date.today().isoformat())+" "+hAttente
+# heure local
+#        self.datetime = ((date.today() + timedelta(days=1)).isoformat())+" "+hAttente
+# si utc < heure local
+        self.datetime = (date.today().isoformat())+" "+hAttente
         self.iteration = 1
         self.termine = False
         cdtTremblayLog (self.fichier, self.driver, self.court, self.dateRes, self.heure, self.mail, self.mdp)
-        print ("Activation robot "+self.mail)
+        self.fichier.critical ("Activation robot "+self.mail)
 
     def __del__ (self):
         self.desactive ()
@@ -82,11 +84,11 @@ class tache (Thread):
             dt = str(datetime.today())
             time.sleep(0.05)
             while (self.actif and self.execute and i<self.iteration and (dt > self.datetime or self.attente == False)  ):
-                print ("dt "+dt+" cible "+self.datetime)
+                self.fichier.critical ("dt "+dt+" cible "+self.datetime)
                 while (self.actif and self.execute and i<self.iteration):
                     i = i + 1
 #                    with verrou:               
-                    self.fichier.info (str(datetime.today())+": réservation "+self.mail+" court "+self.court+" horaire "+self.heure)
+                    self.fichier.critical (str(datetime.today())+": réservation "+self.mail+" court "+self.court+" horaire "+self.heure)
                     self.fct (self.fichier, self.driver, self.court, self.dateRes, self.heure, self.mail, self.mdp)
                 self.termine = True
 
@@ -129,41 +131,41 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
     driver.find_element(By.ID, "d").clear()
     driver.find_element(By.ID, "d").send_keys(dateRes)
 #    driver.find_element(By.ID, "d").send_keys("17/02/2022")
-    fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1")
+    fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1")
     driver.save_screenshot("capture"+court+heure+"v1.png")
     driver.find_element(By.CSS_SELECTOR, ".btn").click()
     elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
-    fichier.info (str(elements)+" verif 1.1")
+    fichier.critical (str(elements)+" verif 1.1")
     
     dtd = datetime.today()
     while len(elements)==0 and (datetime.today()-dtd).seconds < 3:
-        print("1")
+        fichier.critical("1")
 #        driver.get("http://www.tennis94.fr/page/dispo/date"+dateRes)
         driver.find_element(By.ID, "dc").click()
         driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
 #        driver.find_element(By.ID, "d").clear()
 #        driver.find_element(By.ID, "d").send_keys(dateRes)
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
+        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
 #        driver.find_element(By.CSS_SELECTOR, ".btn").click()
         elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
     driver.save_screenshot("capture"+court+heure+"v2.png")
 
     try:
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
+        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
         driver.save_screenshot("capture"+court+heure+"a.png")
         driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
+        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
         driver.save_screenshot("capture"+court+heure+"b.png")
         driver.find_element(By.NAME, "btnresa").click()
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
+        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
         driver.save_screenshot("capture"+court+heure+"c.png")
     except Exception:
-        fichier.info (str(datetime.today())+": erreur réservation date "+ dateRes+ " court "+ court + " heure " + heure)
+        fichier.critical (str(datetime.today())+": erreur réservation date "+ dateRes+ " court "+ court + " heure " + heure)
         pass
     try:
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" D")
+        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" D")
         driver.find_element(By.XPATH, ".//tagName[@attribute=’OK’]");
-        fichier.info (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" E")
+        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" E")
     except Exception:
         pass
 #    driver.find_element(By.NAME, "btnlogout").click()
@@ -193,16 +195,16 @@ handler.setFormatter(formatter)
 
 
 
-print ("Lancement Robot réservation Padel")
-fichier.info (str(datetime.today())+": Lancement Robot réservation Padel")
-print ("")
+fichier.critical ("Lancement Robot réservation Padel")
+fichier.critical (str(datetime.today())+": Lancement Robot réservation Padel")
+fichier.critical ("")
 
 try:
     dictArg = dict((x.strip(), y.strip())
                          for x, y in (element.split(':')
                                   for element in sys.argv[1:]))
 except :
-    print ("Erreur de syntaxe dans les paramètres:")
+    fichier.critical ("Erreur de syntaxe dans les paramètres:")
     syntaxeParametre()
     exit()
 
@@ -224,7 +226,7 @@ if len(sys.argv)>1:
         nbarg = nbarg +1
         attente = dictArg["attente"] == "vrai"
     if len(sys.argv)-1!=nbarg:
-        print ("Erreur de paramètres ",sys.argv[1:])
+        fichier.critical ("Erreur de paramètres ",sys.argv[1:])
         syntaxeParametre ()
         exit ()
  
@@ -238,13 +240,13 @@ def test (liste):
 DOMTree = xml.dom.minidom.parse("RéservationPadel.xml")
 reservation = DOMTree.documentElement
 
-print ("Date: ", dateRes)
+fichier.critical ("Date: ", dateRes)
 if attente:
-    print ("lancement du Robot "+((date.today() + timedelta(days=1)).isoformat())+" "+hAttente)
+    fichier.critical ("lancement du Robot "+((date.today() + timedelta(days=1)).isoformat())+" "+hAttente)
 else:
-    print ("lancement immédiat du Robot")
+    fichier.critical ("lancement immédiat du Robot")
 
-fichier.info (str(datetime.today())+": Date "+dateRes +" attente "+str(attente))
+fichier.critical (str(datetime.today())+": Date "+dateRes +" attente "+str(attente))
  
 
 # Get all créneaux
