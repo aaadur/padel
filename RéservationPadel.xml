@@ -17,7 +17,7 @@
    <user>padeltremblay@gmail.com</user>
    <mdp>newsc@fÃ©</mdp>
 </creneau>
-<creneau ordre="4">
+   <creneau ordre="4">
    <court>B</court>
    <horaire>10</horaire>
    <user>julien1padel@gmail.com</user>
@@ -26,10 +26,16 @@
 <creneau ordre="5">
    <court>C</court>
    <horaire>10</horaire>
-   <user>julien2padel@gmail.com</user>
+   <user>julien4padel@gmail.com</user>
    <mdp>newsc@fÃ©</mdp>
 </creneau>
 <creneau ordre="6">
+   <court>C</court>
+   <horaire>10</horaire>
+   <user>julien2padel@gmail.com</user>
+   <mdp>newsc@fÃ©</mdp>
+</creneau>
+<creneau ordre="7">
    <court>C</court>
    <horaire>11</horaire>
    <user>julien3padel@gmail.com</user>
