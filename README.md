@@ -1,7 +1,7 @@
 # padel
 Robot padel
 
-cat a
+touch a
 -> copier dans a : git clone https//.....(prendre l'adresse dans github)
 $(cat a)
 cd padel
