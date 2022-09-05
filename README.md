@@ -6,3 +6,4 @@ touch a
 $(cat a)
 cd padel
 docker image build -t aaadur/padel .
+docker image push aaadur/padel
