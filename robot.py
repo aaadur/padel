@@ -132,7 +132,7 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
     driver.find_element(By.ID, "d").send_keys(dateRes)
 #    driver.find_element(By.ID, "d").send_keys("17/02/2022")
     fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1")
-    driver.save_screenshot("capture"+court+heure+"v1.png")
+#    driver.save_screenshot("capture"+court+heure+"v1.png")
     driver.find_element(By.CSS_SELECTOR, ".btn").click()
     elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
     fichier.critical (str(elements)+" verif 1.1")
@@ -148,17 +148,17 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
 #        driver.find_element(By.CSS_SELECTOR, ".btn").click()
         elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
-    driver.save_screenshot("capture"+court+heure+"v2.png")
+#    driver.save_screenshot("capture"+court+heure+"v2.png")
 
     try:
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
-        driver.save_screenshot("capture"+court+heure+"a.png")
+#        driver.save_screenshot("capture"+court+heure+"a.png")
         driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
-        driver.save_screenshot("capture"+court+heure+"b.png")
+#        driver.save_screenshot("capture"+court+heure+"b.png")
         driver.find_element(By.NAME, "btnresa").click()
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
-        driver.save_screenshot("capture"+court+heure+"c.png")
+#        driver.save_screenshot("capture"+court+heure+"c.png")
     except Exception:
         fichier.critical (str(datetime.today())+": erreur réservation date "+ dateRes+ " court "+ court + " heure " + heure)
         pass
