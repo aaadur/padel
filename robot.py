@@ -213,7 +213,10 @@ dateRes = (date.today() + timedelta(days=7)).isoformat()
 # Time en local
 #hAttente = "00:00:00"
 # Time de de la région west europe
-hAttente = "22:00:00"
+# Heure d'été
+'hAttente = "22:00:00"
+# Heure d'hivers
+hAttente = "23:00:00"
 fichier.critical ("Heure local au serveur d'attente :"+hAttente)
 
 attente = True
