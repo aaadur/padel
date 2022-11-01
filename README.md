@@ -4,6 +4,12 @@ Robot padel
 
 https://labs.play-with-docker.com/
 
+Cnx Putty
+
+Utiliser Putty gen
+charger la clé générée par Azure et sauvegarder en clé private
+configurer putty en utilisant le fichier  généré dans ssh auth
+
 touch a
 -> copier dans a : git clone https//.....(prendre l'adresse dans github)
 $(cat a)
