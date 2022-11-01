@@ -7,8 +7,9 @@ https://labs.play-with-docker.com/
 Cnx Putty
 
 Utiliser Putty gen
-charger la clé générée par Azure et sauvegarder en clé private
-configurer putty en utilisant le fichier  généré dans ssh auth
+Charger la clé générée par Azure (*.pem) et sauvegarder la en clé private (save private key)
+configurer putty en utilisant le fichier généré (*.ppk) en le paramétrant dans ssh/auth
+
 
 touch a
 -> copier dans a : git clone https//.....(prendre l'adresse dans github)
