@@ -16,6 +16,7 @@ touch a
 $(cat a)
 cd padel
 docker image build -t aaadur/padel .
+docker login -u a...
 docker image push aaadur/padel
 
 
