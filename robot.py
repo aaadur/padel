@@ -256,6 +256,9 @@ fichier.critical (str(datetime.today())+": Date "+dateRes +" attente "+str(atten
 # Get all créneaux
 creneaux = reservation.getElementsByTagName("creneau")
 
+while true:
+    iiii = 0
+
 # initialisation des thread pour chaque créneau à réserver
 robots = []
 
