@@ -42,5 +42,5 @@ VOLUME test /usr/local/bin
 ENV PYTHONPATH="/install"
 RUN export PYTHONPATH=/install
 
-#CMD python3 robot.py
+CMD python3 robot.py
 #CMD [ "python", ma ]
