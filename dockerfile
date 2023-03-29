@@ -20,7 +20,7 @@ RUN apk add --no-cache python3
 
 #Update packages and add the following programs for selenium to work
 RUN apk --update add --no-cache g++
-RUN apk add wget unzip dbus-x11 ttf-freefont firefox-esr=102.4.0 xvfb tar
+RUN apk add wget unzip dbus-x11 ttf-freefont firefox-esr=102.4.0-r0 xvfb tar
 
 #Pull geckodriver from the github respository 
 RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
