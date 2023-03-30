@@ -36,8 +36,16 @@ class tache (Thread):
         self.fichier = fichier
         self.fct = fct
 #        s = Service("C:\Données\Projets\Python\geckodriver\geckodriver.exe")
-        self.driver = webdriver.Firefox()
-        self.vars = {}
+
+# test new version
+        self.options = Options()
+        self.options.binary_location = r"/usr/bin/firefox-esr"
+        self.driver = webdriver.Firefox(options=options)
+# test new version
+
+# appel initial
+#        self.driver = webdriver.Firefox()
+       self.vars = {}
 #        self.driver.get("http://www.tennis94.fr/?_si=trem")
 #        self.driver.get("http://www.tennis94.fr/page/dispo")
         self.driver.get("https://sport94.fr/")
