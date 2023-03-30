@@ -45,7 +45,7 @@ class tache (Thread):
 
 # appel initial
 #        self.driver = webdriver.Firefox()
-       self.vars = {}
+        self.vars = {}
 #        self.driver.get("http://www.tennis94.fr/?_si=trem")
 #        self.driver.get("http://www.tennis94.fr/page/dispo")
         self.driver.get("https://sport94.fr/")
