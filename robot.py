@@ -41,7 +41,7 @@ class tache (Thread):
 # test new version
         self.options = Options()
         self.options.binary_location = r"/usr/bin/firefox-esr"
-        self.driver = webdriver.Firefox(options=options)
+        self.driver = webdriver.Firefox(options=self.options)
 # test new version
 
 # appel initial
