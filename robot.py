@@ -21,11 +21,6 @@ from pyvirtualdisplay import Display
 
 import logging
 
-
-#root.warning("Faut faire gaffe")
-#root.error("Trop tard")
-#root.critical("C'est tout cassé")
-
 verrou = RLock ()
 
 class tache (Thread):
@@ -36,33 +31,24 @@ class tache (Thread):
         self.execute = True
         self.fichier = fichier
         self.fct = fct
-#        s = Service("C:\Données\Projets\Python\geckodriver\geckodriver.exe")
 
-# test new version
+# new version 2023 03 31
         self.options = Options()
         self.options.binary_location = r"/usr/bin/firefox-esr"
         self.driver = webdriver.Firefox(options=self.options)
-# test new version
+#  new version
 
-# appel initial
-#        self.driver = webdriver.Firefox()
         self.vars = {}
-#        self.driver.get("http://www.tennis94.fr/?_si=trem")
-#        self.driver.get("http://www.tennis94.fr/page/dispo")
         self.driver.get("https://sport94.fr/")
         self.driver.set_window_size(1400, 600)
         self.mail = mail
         self.mdp = mdp
         self.court = court
         self.heure = heure
-#        self.dateRes = dateRes
         self.dateRes = dateRes[8:10]+"/"+dateRes[5:7]+"/"+dateRes[0:4]
 
         self.attente = True
 
-# heure local
-#        self.datetime = ((date.today() + timedelta(days=1)).isoformat())+" "+hAttente
-# si utc < heure local
         self.datetime = (date.today().isoformat())+" "+hAttente
         self.iteration = 1
         self.termine = False
@@ -103,59 +89,30 @@ class tache (Thread):
 
 
 def cdtTremblayLog (fichier , driver, court, dateRes, heure, mail, mdp):
-#    driver.find_element(By.NAME, "login").click()
-#    driver.find_element(By.NAME, "login").send_keys(mail)
-#    driver.find_element(By.NAME, "password").send_keys(mdp)
-#    driver.find_element(By.NAME, "btnlogin").click()
-#    driver.find_element(By.LINK_TEXT, "Calendrier réservations").click()
-#    driver.get("http://www.tennis94.fr/page/dispo/date"+dateRes)
 
     driver.find_element(By.LINK_TEXT, "Me connecter").click()
-    # 4 | click | id=input_login | 
-    #driver.find_element(By.ID, "input_login").click()
-    # 5 | type | id=input_login | sduroi@laposte.net
     driver.find_element(By.ID, "input_login").send_keys(mail)
-    # 6 | click | id=input_passwd | 
-    #driver.find_element(By.ID, "input_passwd").click()
-    # 7 | type | id=input_passwd | newsc@fÃ©
     driver.find_element(By.ID, "input_passwd").send_keys(mdp)
-    # 8 | click | id=btnlogin | 
     driver.find_element(By.ID, "btnlogin").click()
     driver.find_element(By.LINK_TEXT, "Choix du site").click()
-    # 10 | click | css=.sitebox:nth-child(1) div | 
     driver.find_element(By.CSS_SELECTOR, ".sitebox:nth-child(1) div").click()
-    #element = driver.find_element(By.ID, "d")
-    #actions = ActionChains(driver)
-    #actions.double_click(element).perform()
-    # 14 | click | id=d | 
-    #driver.find_element(By.ID, "d").click()
-
-
-
-
 
 
 def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
-#    driver.get("http://www.tennis94.fr/page/dispo/date"+dateRes)
     driver.find_element(By.ID, "d").clear()
     driver.find_element(By.ID, "d").send_keys(dateRes)
-#    driver.find_element(By.ID, "d").send_keys("17/02/2022")
     fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1")
 #    driver.save_screenshot("capture"+court+heure+"v1.png")
     driver.find_element(By.CSS_SELECTOR, ".btn").click()
     elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
-    fichier.critical (str(elements)+" verif 1.1")
+    fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1.1")
     
     dtd = datetime.today()
     while len(elements)==0 and (datetime.today()-dtd).seconds < 3:
         fichier.critical("1")
-#        driver.get("http://www.tennis94.fr/page/dispo/date"+dateRes)
         driver.find_element(By.ID, "dc").click()
         driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
-#        driver.find_element(By.ID, "d").clear()
-#        driver.find_element(By.ID, "d").send_keys(dateRes)
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
-#        driver.find_element(By.CSS_SELECTOR, ".btn").click()
         elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
 #    driver.save_screenshot("capture"+court+heure+"v2.png")
 
@@ -165,7 +122,7 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
         driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
 #        driver.save_screenshot("capture"+court+heure+"b.png")
-        driver.find_element(By.NAME, "btnresa").click()
+        driver.find_element(By.NAME, "btnreservation").click()
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
 #        driver.save_screenshot("capture"+court+heure+"c.png")
     except Exception:
@@ -177,7 +134,6 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" E")
     except Exception:
         pass
-#    driver.find_element(By.NAME, "btnlogout").click()
     driver.find_element(By.LINK_TEXT, "Me déconnecter").click()
 
 def syntaxeParametre ():
