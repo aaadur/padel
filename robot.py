@@ -239,7 +239,7 @@ if len(sys.argv)>1:
         nbarg = nbarg +1
         attente = dictArg["attente"] == "vrai"
     if len(sys.argv)-1!=nbarg:
-        fichier.critical ("Erreur de paramètres ",sys.argv[1:])
+        fichier.critical ("Erreur de paramètres "+sys.argv[1:])
         syntaxeParametre ()
         exit ()
  
@@ -253,7 +253,7 @@ def test (liste):
 DOMTree = xml.dom.minidom.parse("RéservationPadel.xml")
 reservation = DOMTree.documentElement
 
-fichier.critical ("Date: ", dateRes)
+fichier.critical ("Date: "+ dateRes)
 if attente:
     fichier.critical ("lancement du Robot "+((date.today() + timedelta(days=1)).isoformat())+" "+hAttente)
 else:
