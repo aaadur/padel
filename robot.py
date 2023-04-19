@@ -37,6 +37,8 @@ class tache (Thread):
         self.options.binary_location = r"/usr/bin/firefox-esr"
         self.driver = webdriver.Firefox(options=self.options)
 #  new version
+#  version windows pour test en local
+#        self.driver = webdriver.Firefox(executable_path="C:\Program Files\geckodriver\geckodriver.exe")
 
         self.vars = {}
         self.driver.get("https://sport94.fr/")
@@ -99,35 +101,51 @@ def cdtTremblayLog (fichier , driver, court, dateRes, heure, mail, mdp):
 
 
 def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
+
+#    ligne col padel 9h = 2 A = 16
+    dictCourt = {"22":"16", "23":"17" , "24":"18" , "25":"19" }
+    dictHeure = {"9":"2", "10":"3" , "11":"4"}
+
+
     driver.find_element(By.ID, "d").clear()
     driver.find_element(By.ID, "d").send_keys(dateRes)
     fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1")
 #    driver.save_screenshot("capture"+court+heure+"v1.png")
     driver.find_element(By.CSS_SELECTOR, ".btn").click()
-    elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
-    fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1.1")
+#    elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
+#    fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 1.1")
     
-    dtd = datetime.today()
-    while len(elements)==0 and (datetime.today()-dtd).seconds < 3:
-        fichier.critical("1")
-        driver.find_element(By.ID, "dc").click()
-        driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
-        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
-        elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
+#    dtd = datetime.today()
+#    while len(elements)==0 and (datetime.today()-dtd).seconds < 3:
+#        fichier.critical("1")
+    driver.find_element(By.ID, "dc").click()
+    driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
+#        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
+#        elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
 #    driver.save_screenshot("capture"+court+heure+"v2.png")
 
-    try:
-        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
-#        driver.save_screenshot("capture"+court+heure+"a.png")
-        driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
-        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
-#        driver.save_screenshot("capture"+court+heure+"b.png")
-        driver.find_element(By.NAME, "btnreservation").click()
-        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
-#        driver.save_screenshot("capture"+court+heure+"c.png")
-    except Exception:
-        fichier.critical (str(datetime.today())+": erreur réservation date "+ dateRes+ " court "+ court + " heure " + heure)
-        pass
+    i = 0
+    nok = True
+    while nok and i < 50:
+        try:
+            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
+        #        driver.save_screenshot("capture"+court+heure+"a.png")
+        #        driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
+            driver.find_element(By.CSS_SELECTOR, "tr:nth-child("+dictHeure[heure]+") > .tenniscell:nth-child("+dictCourt[court]+") .fa").click()        
+            nok = False
+            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
+        #        driver.save_screenshot("capture"+court+heure+"b.png")
+            driver.find_element(By.NAME, "btnreservation").click()
+            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
+        #        driver.save_screenshot("capture"+court+heure+"c.png")
+        except Exception:
+            fichier.critical (str(datetime.today())+": non dispo date "+ dateRes+ " court "+ court + " heure " + heure)
+#            driver.find_element(By.ID, "dc").click()
+            driver.find_element(By.ID, "dc").clear()
+            driver.find_element(By.ID, "dc").send_keys(dateRes)
+            driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
+            i = i + 1
+            pass
     try:
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" D")
         driver.find_element(By.XPATH, ".//tagName[@attribute=’OK’]");
@@ -144,6 +162,7 @@ def syntaxeParametre ():
 
 display = Display(visible=0, size=(800, 800))
 display.start()
+
     
 dictCourt = {"A":"22" , "B":"23" , "C":"24" , "D":"25" }
 
