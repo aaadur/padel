@@ -130,8 +130,8 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
         try:
             fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
         #        driver.save_screenshot("capture"+court+heure+"a.png")
-        #        driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
-            driver.find_element(By.CSS_SELECTOR, "tr:nth-child("+dictHeure[heure]+") > .tenniscell:nth-child("+dictCourt[court]+") .fa").click()        
+            driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
+        #    driver.find_element(By.CSS_SELECTOR, "tr:nth-child("+dictHeure[heure]+") > .tenniscell:nth-child("+dictCourt[court]+") .fa").click()                
             nok = False
             fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
         #        driver.save_screenshot("capture"+court+heure+"b.png")
