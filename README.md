@@ -1,6 +1,12 @@
 # padel
 Robot padel
 
+Création instance container à partir de modèle
+
+Sur le portail utiliser le service : Déployer un modèle personnalisé
+
+![image](https://user-images.githubusercontent.com/56845103/233349857-a4ab5770-c3d5-4bb5-b2dd-232782abb2c9.png)
+
 
 https://labs.play-with-docker.com/
 
