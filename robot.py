@@ -118,8 +118,8 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
 #    dtd = datetime.today()
 #    while len(elements)==0 and (datetime.today()-dtd).seconds < 3:
 #        fichier.critical("1")
-    driver.find_element(By.ID, "dc").click()
-    driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
+#    driver.find_element(By.ID, "dc").click()
+#    driver.find_element(By.ID, "dc").send_keys(Keys.ENTER)
 #        fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" verif 2")
 #        elements = driver.find_elements(By.NAME, "btnreza_"+court+"_"+heure)
 #    driver.save_screenshot("capture"+court+heure+"v2.png")
