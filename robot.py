@@ -81,11 +81,11 @@ class tache (Thread):
             dt = str(datetime.today())
             time.sleep(0.05)
             while (self.actif and self.execute and i<self.iteration and (dt > self.datetime or self.attente == False)  ):
-                self.fichier.critical ("dt "+dt+" cible "+self.datetime)
+#                self.fichier.critical ("dt "+dt+" cible "+self.datetime)
                 while (self.actif and self.execute and i<self.iteration):
                     i = i + 1
 #                    with verrou:               
-                    self.fichier.critical (str(datetime.today())+": réservation "+self.mail+" court "+self.court+" horaire "+self.heure)
+#                    self.fichier.critical (str(datetime.today())+": réservation "+self.mail+" court "+self.court+" horaire "+self.heure)
                     self.fct (self.fichier, self.driver, self.court, self.dateRes, self.heure, self.mail, self.mdp)
                 self.termine = True
 
@@ -128,12 +128,12 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
     nok = True
     while nok and i < 50:
         try:
-            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
+#            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
         #        driver.save_screenshot("capture"+court+heure+"a.png")
             driver.find_element(By.NAME, "btnreza_"+court+"_"+heure).click()
         #    driver.find_element(By.CSS_SELECTOR, "tr:nth-child("+dictHeure[heure]+") > .tenniscell:nth-child("+dictCourt[court]+") .fa").click()                
             nok = False
-            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
+#            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
         #        driver.save_screenshot("capture"+court+heure+"b.png")
             driver.find_element(By.NAME, "btnreservation").click()
             fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
