@@ -240,9 +240,6 @@ fichier.critical (str(datetime.today())+": Date "+dateRes +" attente "+str(atten
 # Get all créneaux
 creneaux = reservation.getElementsByTagName("creneau")
 
-#while True:
-#    iiii = 0
-
 # initialisation des thread pour chaque créneau à réserver
 robots = []
 
@@ -254,12 +251,13 @@ for robot in robots:
     robot.active()
     robot.start()
 
+# Attente 10mn la fin des réservations
+time.sleep(60*10)
+
 while not(test(robots)):
     time.sleep (1)
-
 
 for robot in robots:
     robot.stop()
     
-#fichier.close()
 display.stop()
