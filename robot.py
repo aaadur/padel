@@ -225,7 +225,7 @@ def test (liste):
     return vrai
 
 # Open XML document using minidom parser
-DOMTree = xml.dom.minidom.parse("RéservationPadel.xml")
+DOMTree = xml.dom.minidom.parse("ReservationPadel.xml")
 reservation = DOMTree.documentElement
 
 fichier.critical ("Date: "+ dateRes)
