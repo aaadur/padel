@@ -126,7 +126,7 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
 
     i = 0
     nok = True
-    while nok and i < 50:
+    while nok and i < 3:
         try:
 #            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" A")
         #        driver.save_screenshot("capture"+court+heure+"a.png")
