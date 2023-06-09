@@ -195,11 +195,11 @@ except :
 dateRes = (date.today() + timedelta(days=7)).isoformat()
 
 # Time en local
-#hAttente = "00:00:00"
+hAttente = "00:00:00"
 # Time de de la région west europe
-# Heure d'été
-hAttente = "22:00:00"
-# Heure d'hivers
+# Heure d'été UT
+#hAttente = "22:00:00"
+# Heure d'hivers UT
 #hAttente = "23:00:00"
 fichier.critical ("Heure local au serveur d'attente :"+hAttente)
 
@@ -216,7 +216,7 @@ if len(sys.argv)>1:
     if ("date" in dictArg):
         nbarg = nbarg +1
         dateRes = dictArg["date"]
-    if ("heure" in dictArg):
+    if ("horaire" in dictArg):
         nbarg = nbarg +1
         heure = dictArg["heure"]
     if ("court" in dictArg):
@@ -246,7 +246,7 @@ if mail is not None:
        <mdp>%(mdp)s</mdp>
     </creneau>
     </reservation>"""
-    data = {'planning':'"Padel"', 'ordre':'"1"', 'court':court, 'horaire':heure, 'user':mail, 'mdp':mdp}
+    data = {'planning':'"Padel"', 'ordre':'"1"', 'court':court, 'horaire':horaire, 'user':mail, 'mdp':mdp}
     a =xmlTemplate%data
     DOMTree = parseString (a)
 else:
