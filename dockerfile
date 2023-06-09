@@ -10,4 +10,4 @@ VOLUME test /usr/local/bin
 ENV PYTHONPATH="/install"
 RUN export PYTHONPATH=/install
 
-CMD python3 robot.py
+ENTRYPOINT ["python3", "robot.py"]
