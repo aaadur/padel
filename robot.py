@@ -13,7 +13,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
-from xml.dom.minidom import Element, parse
+from xml.dom.minidom import Element, parse, parseString
 import xml.dom.minidom
 import sys
 from threading import Thread, RLock
@@ -207,9 +207,21 @@ attente = True
 
 nbarg =0
 if len(sys.argv)>1:
+    if ("mail" in dictArg):
+        nbarg = nbarg +1
+        mail = dictArg["mail"]
+    if ("mdp" in dictArg):
+        nbarg = nbarg +1
+        mdp = dictArg["mdp"]
     if ("date" in dictArg):
         nbarg = nbarg +1
         dateRes = dictArg["date"]
+    if ("heure" in dictArg):
+        nbarg = nbarg +1
+        heure = dictArg["heure"]
+    if ("court" in dictArg):
+        nbarg = nbarg +1
+        court = dictArg["court"]
     if ("attente" in dictArg):
         nbarg = nbarg +1
         attente = dictArg["attente"] == "vrai"
@@ -224,9 +236,25 @@ def test (liste):
         vrai = vrai and elt.termine
     return vrai
 
-# Open XML document using minidom parser
-DOMTree = xml.dom.minidom.parse("ReservationPadel.xml")
+if mail is not None:
+    xmlTemplate = """
+    <reservation planning=%(planning)s>
+    <creneau ordre=%(ordre)s>
+       <court>%(court)s</court>
+       <horaire>%(horaire)s</horaire>
+       <user>%(user)s</user>
+       <mdp>%(mdp)s</mdp>
+    </creneau>
+    </reservation>"""
+    data = {'planning':'"Padel"', 'ordre':'"1"', 'court':court, 'horaire':heure, 'user':mail, 'mdp':mdp}
+    a =xmlTemplate%data
+    DOMTree = parseString (a)
+else:
+    # Open XML document using minidom parser
+    DOMTree = xml.dom.minidom.parse("ReservationPadel.xml")
+
 reservation = DOMTree.documentElement
+
 
 fichier.critical ("Date: "+ dateRes)
 if attente:
