@@ -218,7 +218,7 @@ if len(sys.argv)>1:
         dateRes = dictArg["date"]
     if ("horaire" in dictArg):
         nbarg = nbarg +1
-        heure = dictArg["heure"]
+        horaire = dictArg["horaire"]
     if ("court" in dictArg):
         nbarg = nbarg +1
         court = dictArg["court"]
