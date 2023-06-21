@@ -135,7 +135,8 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
             nok = False
 #            fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" B")
         #        driver.save_screenshot("capture"+court+heure+"b.png")
-            driver.find_element(By.ID, "cap6a4").click()
+            driver.find_element(By.CLASS_NAME, "checkbox").click()
+#            driver.find_element(By.ID, "cap6a4").click()
             driver.find_element(By.NAME, "btnreservation").click()
             fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" C")
         #        driver.save_screenshot("capture"+court+heure+"c.png")
