@@ -208,6 +208,7 @@ fichier.critical ("Heure local au serveur d'attente :"+hAttente)
 attente = True
 
 nbarg =0
+mail = ""
 if len(sys.argv)>1:
     if ("mail" in dictArg):
         nbarg = nbarg +1
@@ -238,7 +239,7 @@ def test (liste):
         vrai = vrai and elt.termine
     return vrai
 
-if mail is not None:
+if mail <> "":
     xmlTemplate = """
     <reservation planning=%(planning)s>
     <creneau ordre=%(ordre)s>
