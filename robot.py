@@ -239,7 +239,7 @@ def test (liste):
         vrai = vrai and elt.termine
     return vrai
 
-if mail <> "":
+if mail != "":
     xmlTemplate = """
     <reservation planning=%(planning)s>
     <creneau ordre=%(ordre)s>
