@@ -1,8 +1,20 @@
 <reservation planning="Padel">
-<creneau ordre="1">
+<creneau ordre="2">
    <court>A</court>
    <horaire>9</horaire>
-   <user>user@gmail.com</user>
+   <user>paquitonavaro@gmail.com</user>
+   <mdp>mdp</mdp>
+</creneau>
+<creneau ordre="1">
+   <court>A</court>
+   <horaire>10</horaire>
+   <user>sduroi@laposte.net</user>
+   <mdp>mdp</mdp>
+</creneau>
+<creneau ordre="3">
+   <court>A</court>
+   <horaire>11</horaire>
+   <user>xondor@gmail.com</user>
    <mdp>mdp</mdp>
 </creneau>
 </reservation>
