@@ -16,6 +16,7 @@ from selenium.webdriver.firefox.options import Options
 from xml.dom.minidom import Element, parse, parseString
 import xml.dom.minidom
 import sys
+import os
 from threading import Thread, RLock
 from pyvirtualdisplay import Display
 
@@ -196,14 +197,49 @@ except :
 
 dateRes = (date.today() + timedelta(days=7)).isoformat()
 
+try:
+    HeureHivers = os.environ['HEUREHIVERS']
+except :
+    fichier.critical ("Variable d'environnement HEUREHIVERS inexistante" )
+    exit()
+
+try:
+    RobotAttente = int(os.environ['ROBOTATTENTE'])
+except :
+    fichier.critical ("Variable d'environnement ROBOTATTENTE inexistante ou nopn numérique" )
+    exit()
+    
+try:
+    RobotHoraire = os.environ['ROBOTHORAIRE']
+except :
+    fichier.critical ("Variable d'environnement ROBOTHORAIRE inexistante ou nopn numérique" )
+    exit()
+
+try:
+    RobotMDP = os.environ['ROBOTMDP']
+except :
+    fichier.critical ("Variable d'environnement ROBOTMDP inexistante" )
+    exit()
+
+
+
+if HeureHivers = "TRUE":
+    hAttente = str(RobotAttente - 1).zfill(2)+":00:00"
+else:
+    hAttente = str(RobotAttente - 2).zfill(2)+":00:00"
+    
+
+
 # Time en local
 # hAttente = "00:00:00"
 # Time de de la région west europe
 # Heure d'été UT
-hAttente = "22:00:00"
+# hAttente = "22:00:00"
 # Heure d'hivers UT
 #hAttente = "23:00:00"
+
 fichier.critical ("Heure local au serveur d'attente :"+hAttente)
+
 
 attente = True
 
@@ -275,7 +311,9 @@ creneaux = reservation.getElementsByTagName("creneau")
 robots = []
 
 for creneau in creneaux:
-    robots.append(tache (fichier, cdtTremblayRes , creneau.getElementsByTagName("user")[0].childNodes[0].data, creneau.getElementsByTagName("mdp")[0].childNodes[0].data, dictCourt[creneau.getElementsByTagName("court")[0].childNodes[0].data],dateRes,creneau.getElementsByTagName("horaire")[0].childNodes[0].data,hAttente))
+#    robots.append(tache (fichier, cdtTremblayRes , creneau.getElementsByTagName("user")[0].childNodes[0].data, creneau.getElementsByTagName("mdp")[0].childNodes[0].data, dictCourt[creneau.getElementsByTagName("court")[0].childNodes[0].data],dateRes,creneau.getElementsByTagName("horaire")[0].childNodes[0].data,hAttente))
+    if creneau.getElementsByTagName("horaire")[0].childNodes[0].data == RobotHoraire:
+        robots.append(tache (fichier, cdtTremblayRes , creneau.getElementsByTagName("user")[0].childNodes[0].data, RobotMDP, dictCourt[creneau.getElementsByTagName("court")[0].childNodes[0].data],dateRes,creneau.getElementsByTagName("horaire")[0].childNodes[0].data,hAttente))
 
 for robot in robots:
     robot.minuit (attente)
