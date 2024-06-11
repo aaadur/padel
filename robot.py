@@ -154,7 +154,7 @@ def cdtTremblayRes (fichier , driver, court, dateRes, heure, mail, mdp):
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" D")
 #        driver.find_element(By.XPATH, ".//tagName[@attribute=’OK’]");
         url = 'https://prod-07.northcentralus.logic.azure.com:443/workflows/b4925629e51b4ae789cafff7a811a3be/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wZqUETgFv3ud86-JoloZb88dgD4nAFNFaeGx35oogZQ'
-        urlCB = driver.getCurrentUrl
+        urlCB = driver.current_url
         params= {"url":urlCB,"court":court+" "+heure}
         x = requests.post(url, json=params)
         fichier.critical (str(datetime.today())+": LOG date "+ dateRes+ " court "+ court + " heure " + heure+" E")
