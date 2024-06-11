@@ -228,7 +228,7 @@ except :
 
 
 
-if HeureHivers = "TRUE":
+if HeureHivers == "TRUE":
     hAttente = str(RobotAttente - 1).zfill(2)+":00:00"
 else:
     hAttente = str(RobotAttente - 2).zfill(2)+":00:00"
