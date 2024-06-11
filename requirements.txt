@@ -3,4 +3,4 @@ regex
 selenium
 pyvirtualdisplay
 pytest
-
+requests
